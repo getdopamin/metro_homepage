@@ -44,20 +44,21 @@ const List = () => {
 	}
 
 	return (
-		<div id="list">
-			<div className="grid grid-cols-3 gap-4 px-3 py-2 mb-5">
+		<div id="list">	
+			<div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-3 lg:px-3 py-2 my-8 justify-center">
 				{settings.sections.list.map((section, index) => {
 					return (
 						<Section
-							key={index}
-							section={section}
-							filter={command}
-							selection={selection}
+						key={index}
+						section={section}
+						filter={command}
+						selection={selection}
 						/>
 					)
 				})}
 			</div>
-			<Search commandChange={handleCommandChange} selectionChange={handleSelectionChange} />
+				<Search commandChange={handleCommandChange} selectionChange={handleSelectionChange} />
+			
 		</div>
 	)
 }

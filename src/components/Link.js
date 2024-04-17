@@ -5,13 +5,21 @@ import { Icon } from "@iconify/react"
 const Link = ({ linkData, filter, selection }) => {
 	const { settings } = useSettings()
 	const [isHidden, setHidden] = useState(false)
-	const [isSelected, setSelected] = useState(false)
+	const [isSelected, setSelected] = useState(false);
+	const [isImage, setIsImage] = useState(false);
 
 	const name = linkData.name
 	const lower_name = linkData.name.toLowerCase()
 	const url = linkData.url
 	const icon = linkData.icon
 	const target = settings.urlLaunch.target
+
+	function handleImageError(e){
+		console.log(e)
+		e.target.background = "#fff"
+		e.target.src = 'https://img.icons8.com/?size=512&id=k3AEa6M9q92t&format=png';
+		setIsImage(true);
+	}
 
 	useEffect(() => {
 		const lower_command = filter.toLowerCase()
@@ -39,7 +47,8 @@ const Link = ({ linkData, filter, selection }) => {
 				rel="noopener noreferrer nofollow"
 				target={target}>
 				<span className="inline-block w-4 h-4 align-middle">
-					<Icon icon={icon} />
+					{/* <Icon icon= /> */}
+					<img loading="lazy" className={`rounded-terminal ${isImage && 'bg-white'}`} src={`http://www.google.com/s2/favicons?domain=${icon}`} alt={name}  onError={(e)=> handleImageError(e)} />
 				</span>
 				<span className="inline-block pl-2 font-light leading-8 align-middle">{name}</span>
 			</a>
